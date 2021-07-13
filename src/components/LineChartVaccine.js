@@ -36,8 +36,7 @@ const options = {
     ],
     yAxes: [
       {  
-        ticks: {
-          // Include a dollar sign in the ticks
+        ticks: {       
           callback: function (value, index, values) {
             return numeral(value).format('0a');
           },
@@ -50,39 +49,37 @@ const options = {
   },
 };
 
-// FIX: The method currently only works with cases, 
-// but it should also work with deaths and recovered. 
-const buildChartData = (data, casesType) => {
+const buildChartData = (data) => {
   let chartData = [];
   let lastDataPoint;
-  for (let date in data.cases) {    
+  for (let date in data.timeline) {   
     if (lastDataPoint) {
       let newDataPoint = {
         x: date,
-        y: data[casesType][date] - lastDataPoint,
-      };
+        y: data["timeline"][date] - lastDataPoint,
+      };      
       chartData.push(newDataPoint);
     }
-    lastDataPoint = data[casesType][date];
+    lastDataPoint = data["timeline"][date];
   }
   return chartData;
 };
 
-function LineChart({casesType}) {
-  const [data, setData] = useState({});
+function LineChartVaccine({selectedCountryCode}) {
+  const [data, setData] = useState({}); 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
+      await fetch(`https://disease.sh/v3/covid-19/vaccine/coverage/countries/${selectedCountryCode}?lastdays=120`)
         .then((response) => {
           return response.json();
         })
         .then((data) => {
-          let chartData = buildChartData(data, casesType);
+          let chartData = buildChartData(data);
           setData(chartData);  
         });
     };
     fetchData();
-  }, [casesType]);
+  }, [selectedCountryCode]);  
 
   return (
     <div>
@@ -105,4 +102,4 @@ function LineChart({casesType}) {
   );
 }
 
-export default LineChart;
+export default LineChartVaccine;

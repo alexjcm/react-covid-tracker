@@ -4,7 +4,7 @@ import numeral from 'numeral';
 
 import './CountryTable.css';
 
-function CountryTable({title, countries}) {
+function CountryVaccineTable({title, countries}) {
   return (
     <div className="tableContainer">
       <h3 className="tableHeader">{title}</h3>
@@ -13,7 +13,7 @@ function CountryTable({title, countries}) {
           <tr>
             <td>{country.country}</td>
             <td>
-              <strong>{numeral(country.cases).format('0,0')}</strong>
+              <strong>{numeral(country.timeline[0].total).format('0,0')}</strong>
             </td>
           </tr>
         ))}
@@ -22,4 +22,4 @@ function CountryTable({title, countries}) {
   );
 }
 
-export default CountryTable;
+export default CountryVaccineTable;

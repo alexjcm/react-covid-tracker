@@ -20,20 +20,15 @@
   background-color: rgb(213, 220, 226);
 }
 
-/*
-::-webkit-scrollbar-button {
-  background-color: rgb(137, 224, 217);
-}*/
-
 body {
   background-color: #f5f6fa;
 }
 
 .app {
-  display: flex;
-  justify-content: space-evenly;
+  display: flex; 
+  justify-content: flex-start;
   background-color: #f5f6fa;
-  padding: 20px 0 20px 0;
+  padding: 20px 30px;
 }
 
 .appHeader {
@@ -55,7 +50,15 @@ body {
 }
 
 .appLeft {
-  flex: 0.9;
+  width: 800px;  
+}
+/*flex: 0.9;*/
+
+.appInformation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 10px;
 }
 
 .appInformation>h3 {
@@ -67,6 +70,17 @@ body {
 
 .appInformation>h3:last-of-type {
   margin-top: 1rem;
+}
+
+.appTables {
+  display: flex; 
+  padding-left: 20px;
+}
+
+.appChart {
+  width: 450px;
+  padding-top: 30px;
+  padding-left: 20px;
 }
 
 .form-control {

@@ -6,9 +6,11 @@ import 'leaflet/dist/leaflet.css';
 
 import InfoCard from './components/InfoCard';
 import LineChart from './components/LineChart';
+import LineChartVaccine from './components/LineChartVaccine';
 import CountryTable from './components/CountryTable';
+import CountryVaccineTable from './components/CountryVaccineTable';
 import MapContainer from './components/MapContainer';
-import {sortData, prettyPrintStat} from './utils/util';
+import {sortData, sortDataVaccine, prettyPrintStat} from './utils/util';
 import './App.css';
 
 const App = () => {
@@ -20,6 +22,8 @@ const App = () => {
   const [casesType, setCasesType] = useState('cases');
   const [mapCenter, setMapCenter] = useState({lat: -0.27489, lng: -78.4676});
   const [mapZoom, setMapZoom] = useState(5);
+  const [tableVaccine, setTableVaccine] = useState([]);
+  const [selectedCountryCode, setSelectedCountryCode] = useState('EC');
 
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
@@ -48,11 +52,25 @@ const App = () => {
     getCountriesData();
   }, []);
 
-  //console.log(casesType);
+  useEffect(() => {
+    const getCountriesData = async () => {
+      fetch(
+        'https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=1&fullData=true'
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          let sortedDataV = sortDataVaccine(data);
+          setTableVaccine(sortedDataV);
+        });
+    };
+
+    getCountriesData();
+  }, []);
 
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
-
+    console.log("countryCode", countryCode)
+    setSelectedCountryCode(countryCode);
     const url =
       countryCode === 'worldwide'
         ? 'https://disease.sh/v3/covid-19/all'
@@ -63,7 +81,7 @@ const App = () => {
         setInputCountry(countryCode);
         setCountryInfo(data);
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-        setMapZoom(4);
+        setMapZoom(5);
       });
   };
 
@@ -71,7 +89,7 @@ const App = () => {
     <div className="app">
       <div className="appLeft">
         <div className="appHeader">
-          <h1 className="header">COVID-19 Tracker</h1>
+          <h1 className="header">COVID-19 Global Cases</h1>
           <Form.Control as="select" value={country} onChange={onCountryChange}>
             <option value="worldwide">Worldwide</option>
             {countries.map((country) => (
@@ -82,7 +100,7 @@ const App = () => {
         <div className="appStats">
           <InfoCard
             onClick={(e) => setCasesType('cases')}
-            title="Cases"
+            title="Today Confirmed Cases"
             isRed
             active={casesType === 'cases'}
             cases={prettyPrintStat(countryInfo.todayCases)}
@@ -90,14 +108,14 @@ const App = () => {
           />
           <InfoCard
             onClick={(e) => setCasesType('recovered')}
-            title="Recovered"
+            title="Today Recovered"
             active={casesType === 'recovered'}
             cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={numeral(countryInfo.recovered).format('0.0a')}
           />
           <InfoCard
             onClick={(e) => setCasesType('deaths')}
-            title="Deaths"
+            title="Today Deaths"
             isRed
             active={casesType === 'deaths'}
             cases={prettyPrintStat(countryInfo.todayDeaths)}
@@ -114,10 +132,25 @@ const App = () => {
       <Card>
         <Card.Body>
           <div className="appInformation">
-            <h3>Live Cases by Country</h3>
-            <CountryTable countries={tableData} />
-            <h3>Worldwide new {casesType}</h3>
-            <LineChart casesType={casesType} />
+            <div className="appTables">
+              <CountryTable
+                title="Confirmed Cases by Country"
+                countries={tableData}
+              />
+              <CountryVaccineTable
+                title="Vaccines rolled out by Country"
+                countries={tableVaccine}
+              />
+            </div>
+            <div className="appChart">
+              <h3>Worldwide new {casesType} in last 120 days</h3>
+              <LineChart title casesType={casesType} />
+              <br />
+              <h3>Vaccines rolled out by selected country in last 120 days</h3>
+              <LineChartVaccine                
+                selectedCountryCode={selectedCountryCode}            
+              />
+            </div>
           </div>
         </Card.Body>
       </Card>
