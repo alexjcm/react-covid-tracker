@@ -2,6 +2,29 @@
   margin: 0;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(185, 184, 184);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #eeecec;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: rgb(213, 220, 226);
+}
+
+/*
+::-webkit-scrollbar-button {
+  background-color: rgb(137, 224, 217);
+}*/
+
 body {
   background-color: #f5f6fa;
 }
@@ -10,7 +33,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   background-color: #f5f6fa;
-  padding: 20px;
+  padding: 20px 0 20px 0;
 }
 
 .appHeader {
@@ -20,29 +43,37 @@ body {
   justify-content: space-between;
 }
 
-.appHeader > h1 {
-  color: #fc3c3c;
+.appHeader>h1 {
+  color: #626567;
   font-size: 2rem;
 }
 
 .appStats {
   display: flex;
   justify-content: space-between;
+  color: #626567;
 }
 
 .appLeft {
   flex: 0.9;
 }
 
-.appInformation > h3 {
+.appInformation>h3 {
   color: #6a5d5d;
   font-weight: 400;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
-.appInformation > h3:last-of-type {
+.appInformation>h3:last-of-type {
   margin-top: 1rem;
+}
+
+.form-control {
+  width: 150px;
+  height: 24px;
+  color: #626567;
+  font-size: 14px;
 }
 
 @media (max-width: 990px) {

@@ -18,8 +18,8 @@ const App = () => {
   const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState('cases');
-  const [mapCenter, setMapCenter] = useState({lat: 34.80746, lng: -40.4796});
-  const [mapZoom, setMapZoom] = useState(3);
+  const [mapCenter, setMapCenter] = useState({lat: -0.27489, lng: -78.4676});
+  const [mapZoom, setMapZoom] = useState(5);
 
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
@@ -48,7 +48,7 @@ const App = () => {
     getCountriesData();
   }, []);
 
-  console.log(casesType);
+  //console.log(casesType);
 
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
@@ -71,7 +71,7 @@ const App = () => {
     <div className="app">
       <div className="appLeft">
         <div className="appHeader">
-          <h1>COVID-19 Tracker</h1>
+          <h1 className="header">COVID-19 Tracker</h1>
           <Form.Control as="select" value={country} onChange={onCountryChange}>
             <option value="worldwide">Worldwide</option>
             {countries.map((country) => (
@@ -82,7 +82,7 @@ const App = () => {
         <div className="appStats">
           <InfoCard
             onClick={(e) => setCasesType('cases')}
-            title="Coronavirus Cases"
+            title="Cases"
             isRed
             active={casesType === 'cases'}
             cases={prettyPrintStat(countryInfo.todayCases)}

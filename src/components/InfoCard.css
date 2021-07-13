@@ -1,5 +1,7 @@
 .infoCard {
   flex: 1;
+  border: 1px solid #dadcdd;
+  border-radius: 5px;
 }
 
 .infoCard:not(:last-child) {
@@ -7,12 +9,12 @@
 }
 
 .infoCard--selected {
-  border-top: 10px solid #4EDF4E ;
+  border-top: 5px solid #008000 ;
 }
-
+/*
 .infoCard--red {
-  border-color: red;
-}
+  border-color: #cc1034;
+}*/
 
 .infoCardCases--green {
   color: #008000 !important;

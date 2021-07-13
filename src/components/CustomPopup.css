@@ -1,0 +1,30 @@
+.infoContainer {
+    width: 145px;
+}
+
+.leaflet-popup-content {
+    margin: 10px 0 10px 10px;
+}
+
+.infoFlag img {
+    width: 40px;
+    border-radius: 5px;
+}
+
+.infoFlag {
+    height: 30px;
+    width: 30%;
+    background-size: cover;
+    border-radius: 4px;
+}
+
+.infoName {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.infoConfirmed, .infoRecovered, .infoDeaths {
+    font-size: 12px;
+    margin-top: 1px;
+}
