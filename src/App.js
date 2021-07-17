@@ -14,7 +14,7 @@ import {sortData, sortDataVaccine, prettyPrintStat} from './utils/util';
 import './App.css';
 
 const App = () => {
-  const [country, setInputCountry] = useState('worldwide');
+  const [selectedCountry, setSelectedCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
   const [countries, setCountries] = useState([]);
   const [mapCountries, setMapCountries] = useState([]);
@@ -23,7 +23,6 @@ const App = () => {
   const [mapCenter, setMapCenter] = useState({lat: -0.27489, lng: -78.4676});
   const [mapZoom, setMapZoom] = useState(5);
   const [tableVaccine, setTableVaccine] = useState([]);
-  const [selectedCountryCode, setSelectedCountryCode] = useState('EC');
 
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
@@ -69,8 +68,6 @@ const App = () => {
 
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
-    console.log("countryCode", countryCode)
-    setSelectedCountryCode(countryCode);
     const url =
       countryCode === 'worldwide'
         ? 'https://disease.sh/v3/covid-19/all'
@@ -78,9 +75,11 @@ const App = () => {
     await fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setInputCountry(countryCode);
+        setSelectedCountry(countryCode);
         setCountryInfo(data);
-        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        countryCode === 'worldwide'
+          ? setMapCenter({lat: -0.27489, lng: -78.4676})
+          : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(5);
       });
   };
@@ -90,7 +89,10 @@ const App = () => {
       <div className="appLeft">
         <div className="appHeader">
           <h1 className="header">COVID-19 Global Cases</h1>
-          <Form.Control as="select" value={country} onChange={onCountryChange}>
+          <Form.Control
+            as="select"
+            value={selectedCountry}
+            onChange={onCountryChange}>
             <option value="worldwide">Worldwide</option>
             {countries.map((country) => (
               <option value={country.value}>{country.name}</option>
@@ -101,14 +103,15 @@ const App = () => {
           <InfoCard
             onClick={(e) => setCasesType('cases')}
             title="Today Confirmed Cases"
-            isRed
             active={casesType === 'cases'}
+            caseType="cases"
             cases={prettyPrintStat(countryInfo.todayCases)}
             total={numeral(countryInfo.cases).format('0.0a')}
           />
           <InfoCard
             onClick={(e) => setCasesType('recovered')}
             title="Today Recovered"
+            caseType="recovered"
             active={casesType === 'recovered'}
             cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={numeral(countryInfo.recovered).format('0.0a')}
@@ -116,7 +119,7 @@ const App = () => {
           <InfoCard
             onClick={(e) => setCasesType('deaths')}
             title="Today Deaths"
-            isRed
+            caseType="deaths"
             active={casesType === 'deaths'}
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={numeral(countryInfo.deaths).format('0.0a')}
@@ -143,12 +146,20 @@ const App = () => {
               />
             </div>
             <div className="appChart">
-              <h3>Worldwide new {casesType} in last 120 days</h3>
+              <h3 className="lineChartName">
+                Worldwide new {casesType} in last 4 months
+              </h3>
               <LineChart title casesType={casesType} />
               <br />
-              <h3>Vaccines rolled out by selected country in last 120 days</h3>
-              <LineChartVaccine                
-                selectedCountryCode={selectedCountryCode}            
+              <h3 className="lineChartName">
+                {selectedCountry === 'worldwide'
+                  ? 'Vaccines rolled out in Ecuador (default select) in last 4 months'
+                  : `Vaccines rolled out in ${selectedCountry} in last 4 months`}
+              </h3>
+              <LineChartVaccine
+                selectedCountryCode={
+                  selectedCountry === 'worldwide' ? 'EC' : selectedCountry
+                }
               />
             </div>
           </div>

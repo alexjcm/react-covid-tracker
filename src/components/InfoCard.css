@@ -1,7 +1,10 @@
 .infoCard {
   flex: 1;
-  border: 1px solid #dadcdd;
-  border-radius: 5px;
+  padding-left: 6px;
+  border: 1px solid #e5e6e7;
+  border-bottom: 1px solid #b6b6b6;
+  border-right: 1px solid #b6b6b6;
+  border-radius: 6px;
 }
 
 .infoCard:not(:last-child) {
@@ -9,27 +12,34 @@
 }
 
 .infoCard--selected {
-  border-top: 5px solid #008000 ;
-}
-/*
-.infoCard--red {
-  border-color: #cc1034;
-}*/
-
-.infoCardCases--green {
-  color: #008000 !important;
+  box-shadow: rgba(88, 88, 88, 0.19) 0px 6px 10px, rgba(99, 98, 98, 0.23) 0px 6px 6px;
 }
 
 .infoCardCases {
-  color: #cc1034;
   font-weight: 600;
   font-size: 1.75rem;
-  margin-bottom: 0.5rem;
 }
 
 .infoCardTotal {
   color: #6c757d;
   font-weight: 700 !important;
   font-size: 0.8rem !important;
-  margin-top: 15px !important;
+  margin-top: 15px !important; 
+  padding-bottom: 5px;
+}
+
+.infoCard--cases {
+  color: #7a0cb9 !important;
+}
+
+.infoCard--recovered {
+  color: #008000 !important;
+}
+
+.infoCard--deaths {
+  color: #e93111 !important;
+}
+
+.card-title {
+  color: #727171 !important;
 }

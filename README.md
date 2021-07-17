@@ -1,4 +1,4 @@
-# React Live Markdown Editor &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+# COVID-19 Global Cases &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 ## Installation
 
@@ -33,10 +33,10 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Contributing 🤗
+## Contributing
 
 Pull requests are welcome.
 
 ## License
 
-React is [MIT licensed](./LICENSE).
+[MIT licensed](./LICENSE).

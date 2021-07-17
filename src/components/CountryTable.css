@@ -1,6 +1,6 @@
 .tableContainer {
   width: 210px;
-  padding-right: 20px;
+  padding-right: 20px; 
 }
 
 .tableHeader {
@@ -13,7 +13,10 @@
   overflow: scroll;
   color: #6a5d5d;
   background-color: white;
-  height: 200px;  
+  height: 200px;
+  overflow-x: hidden;
+  border: 1px solid #dadada;
+  border-radius: 5px;
 }
 
 .table tr {

@@ -3,11 +3,11 @@ import React from 'react';
 import numeral from 'numeral';
 import {Circle, Popup} from 'react-leaflet';
 
-import "./CustomPopup.css"
+import './CustomPopup.css';
 
-// rojo
-// verde
 // naranja
+// verde
+// rojo
 const casesTypeColors = {
   cases: {
     hex: '#0000FF',
@@ -33,8 +33,7 @@ export const showDataOnMap = (data, casesType = 'cases') =>
       radius={
         Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
       }
-      stroke={false}
-      >
+      stroke={false}>
       <Popup>
         <div className="infoContainer">
           <div className="infoName">{country.country}</div>

@@ -3,21 +3,21 @@ import React, {useState, useEffect} from 'react';
 import {Line} from 'react-chartjs-2';
 import numeral from 'numeral';
 
-import "./LineChart.css"
+import './LineChart.css';
 
 const options = {
   plugins: {
     legend: {
-      display: false
+      display: false,
     },
-  },  
+  },
   elements: {
     point: {
       radius: 0,
     },
   },
   maintainAspectRatio: false,
-  tooltips: { 
+  tooltips: {
     callbacks: {
       label: function (tooltipItem, data) {
         return numeral(tooltipItem.value).format('+0,0');
@@ -28,14 +28,14 @@ const options = {
     xAxes: [
       {
         type: 'time',
-        time: {          
+        time: {
           format: 'MM/DD/YY',
           tooltipFormat: 'll',
         },
       },
     ],
     yAxes: [
-      {  
+      {
         ticks: {
           // Include a dollar sign in the ticks
           callback: function (value, index, values) {
@@ -50,12 +50,12 @@ const options = {
   },
 };
 
-// FIX: The method currently only works with cases, 
-// but it should also work with deaths and recovered. 
+// FIX: The method currently only works with cases,
+// but it should also work with deaths and recovered.
 const buildChartData = (data, casesType) => {
   let chartData = [];
   let lastDataPoint;
-  for (let date in data.cases) {    
+  for (let date in data.cases) {
     if (lastDataPoint) {
       let newDataPoint = {
         x: date,
@@ -78,7 +78,7 @@ function LineChart({casesType}) {
         })
         .then((data) => {
           let chartData = buildChartData(data, casesType);
-          setData(chartData);  
+          setData(chartData);
         });
     };
     fetchData();
@@ -87,10 +87,11 @@ function LineChart({casesType}) {
   return (
     <div>
       {data?.length > 0 && (
-        <Line className="lineChart"  
+        <Line
+          className="lineChart"
           data={{
             datasets: [
-              {         
+              {
                 backgroundColor: 'rgba(75,192,192,0.2)',
                 borderColor: 'rgba(75,192,192,1)',
                 fill: true,

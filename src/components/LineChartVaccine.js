@@ -3,21 +3,21 @@ import React, {useState, useEffect} from 'react';
 import {Line} from 'react-chartjs-2';
 import numeral from 'numeral';
 
-import "./LineChart.css"
+import './LineChart.css';
 
 const options = {
   plugins: {
     legend: {
-      display: false
+      display: false,
     },
-  },  
+  },
   elements: {
     point: {
       radius: 0,
     },
   },
   maintainAspectRatio: false,
-  tooltips: { 
+  tooltips: {
     callbacks: {
       label: function (tooltipItem, data) {
         return numeral(tooltipItem.value).format('+0,0');
@@ -28,15 +28,15 @@ const options = {
     xAxes: [
       {
         type: 'time',
-        time: {          
+        time: {
           format: 'MM/DD/YY',
           tooltipFormat: 'll',
         },
       },
     ],
     yAxes: [
-      {  
-        ticks: {       
+      {
+        ticks: {
           callback: function (value, index, values) {
             return numeral(value).format('0a');
           },
@@ -52,42 +52,45 @@ const options = {
 const buildChartData = (data) => {
   let chartData = [];
   let lastDataPoint;
-  for (let date in data.timeline) {   
+  for (let date in data.timeline) {
     if (lastDataPoint) {
       let newDataPoint = {
         x: date,
-        y: data["timeline"][date] - lastDataPoint,
-      };      
+        y: data['timeline'][date] - lastDataPoint,
+      };
       chartData.push(newDataPoint);
     }
-    lastDataPoint = data["timeline"][date];
+    lastDataPoint = data['timeline'][date];
   }
   return chartData;
 };
 
 function LineChartVaccine({selectedCountryCode}) {
-  const [data, setData] = useState({}); 
+  const [data, setData] = useState({});
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(`https://disease.sh/v3/covid-19/vaccine/coverage/countries/${selectedCountryCode}?lastdays=120`)
+      await fetch(
+        `https://disease.sh/v3/covid-19/vaccine/coverage/countries/${selectedCountryCode}?lastdays=120`
+      )
         .then((response) => {
           return response.json();
         })
         .then((data) => {
           let chartData = buildChartData(data);
-          setData(chartData);  
+          setData(chartData);
         });
     };
     fetchData();
-  }, [selectedCountryCode]);  
+  }, [selectedCountryCode]);
 
   return (
     <div>
       {data?.length > 0 && (
-        <Line className="lineChart"  
+        <Line
+          className="lineChart"
           data={{
             datasets: [
-              {         
+              {
                 backgroundColor: 'rgba(75,192,192,0.2)',
                 borderColor: 'rgba(75,192,192,1)',
                 fill: true,
