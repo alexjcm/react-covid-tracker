@@ -1,0 +1,11 @@
+#Build Stage Start
+FROM node:14-alpine as builder
+WORKDIR /react-covid-tracker
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN yarn build
+
+# Run Stage Start
+FROM nginx
+COPY --from=builder /react-covid-tracker/build /usr/share/nginx/html
