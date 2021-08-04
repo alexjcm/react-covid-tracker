@@ -20,9 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "docker:build": "docker build -f Dockerfile.dev --rm -t covid-tracker-image .",
-    "docker:run": "docker run --rm -v /home/alexjcm/Documentos/projects/react-covid-tracker:/react-covid-tracker -p 3000:3000 --name covid-tracker covid-tracker-image",
-    "docker:stop": "docker rm -f covid-tracker"
+    "docker:build": "docker build --rm -t covid-tracker.",
+    "docker:run": "docker run --rm -v /home/alexjcm/Documentos/projects/react-covid-tracker:/react-covid-tracker -p 3000:3000 --name covid-tracker-app covid-tracker",
+    "docker:stop": "docker rm -f covid-tracker-app"
   },
   "eslintConfig": {
     "extends": "react-app"
