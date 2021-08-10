@@ -4,6 +4,7 @@ import {Line} from 'react-chartjs-2';
 import numeral from 'numeral';
 
 import './LineChart.css';
+import {COVID_API} from '../api/covid19Api';
 
 const options = {
   plugins: {
@@ -70,7 +71,7 @@ function LineChartVaccine({selectedCountryCode}) {
   useEffect(() => {
     const fetchData = async () => {
       await fetch(
-        `https://disease.sh/v3/covid-19/vaccine/coverage/countries/${selectedCountryCode}?lastdays=120`
+        `${COVID_API.url}/vaccine/coverage/countries/${selectedCountryCode}?lastdays=120`
       )
         .then((response) => {
           return response.json();

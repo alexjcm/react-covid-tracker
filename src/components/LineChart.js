@@ -4,6 +4,7 @@ import {Line} from 'react-chartjs-2';
 import numeral from 'numeral';
 
 import './LineChart.css';
+import {COVID_API} from '../api/covid19Api';
 
 const options = {
   plugins: {
@@ -72,7 +73,7 @@ function LineChart({casesType}) {
   const [data, setData] = useState({});
   useEffect(() => {
     const fetchData = async () => {
-      await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
+      await fetch(`${COVID_API.url}/historical/all?lastdays=120`)
         .then((response) => {
           return response.json();
         })

@@ -12,6 +12,7 @@ import CountryVaccineTable from './components/CountryVaccineTable';
 import MapContainer from './components/MapContainer';
 import {sortData, sortDataVaccine, prettyPrintStat} from './utils/util';
 import './App.css';
+import {COVID_API} from "./api/covid19Api"
 
 const App = () => {
   const [selectedCountry, setSelectedCountry] = useState('worldwide');
@@ -25,7 +26,7 @@ const App = () => {
   const [tableVaccine, setTableVaccine] = useState([]);
 
   useEffect(() => {
-    fetch('https://disease.sh/v3/covid-19/all')
+    fetch(`${COVID_API.url}/all`)
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
@@ -34,7 +35,7 @@ const App = () => {
 
   useEffect(() => {
     const getCountriesData = async () => {
-      fetch('https://disease.sh/v3/covid-19/countries')
+      fetch(`${COVID_API.url}/countries`)
         .then((response) => response.json())
         .then((data) => {
           const countries = data.map((country) => ({
@@ -54,7 +55,7 @@ const App = () => {
   useEffect(() => {
     const getCountriesData = async () => {
       fetch(
-        'https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=1&fullData=true'
+        `${COVID_API.url}/vaccine/coverage/countries?lastdays=1&fullData=true`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -70,8 +71,8 @@ const App = () => {
     const countryCode = e.target.value;
     const url =
       countryCode === 'worldwide'
-        ? 'https://disease.sh/v3/covid-19/all'
-        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+        ? `${COVID_API.url}/all`
+        : `${COVID_API.url}/countries/${countryCode}`;
     await fetch(url)
       .then((response) => response.json())
       .then((data) => {

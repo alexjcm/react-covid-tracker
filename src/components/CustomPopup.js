@@ -5,9 +5,6 @@ import {Circle, Popup} from 'react-leaflet';
 
 import './CustomPopup.css';
 
-// naranja
-// verde
-// rojo
 const casesTypeColors = {
   cases: {
     hex: '#0000FF',
