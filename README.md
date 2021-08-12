@@ -1,6 +1,13 @@
-# COVID-19 Global Cases
+# COVID-19 Global Cases Tracker
 
 [![Deploy](https://github.com/alexjcm/react-covid-tracker/actions/workflows/deploy.yml/badge.svg)](https://github.com/alexjcm/react-covid-tracker/actions) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+## Features
+
+- Interactive map
+- Cases by country
+- Vaccines rolled out by country
+- Worldwide new cases
 
 ## Installation
 
@@ -18,16 +25,19 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 `rpm run build`
 
 Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 ## Installation with Docker
+
+`npm run docker-build`
+
+`npm run docker-run`
+
+Or
 
 `docker build --rm -t covid-tracker .`
 

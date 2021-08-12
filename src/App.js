@@ -12,7 +12,7 @@ import CountryVaccineTable from './components/CountryVaccineTable';
 import MapContainer from './components/MapContainer';
 import {sortData, sortDataVaccine, prettyPrintStat} from './utils/util';
 import './App.css';
-import {COVID_API} from "./api/covid19Api"
+import {COVID_API} from './api/covid19Api';
 
 const App = () => {
   const [selectedCountry, setSelectedCountry] = useState('worldwide');
