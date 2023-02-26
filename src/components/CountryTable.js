@@ -4,7 +4,7 @@ import numeral from 'numeral';
 
 import './CountryTable.css';
 
-function CountryTable({title, countries}) {
+function CountryTable({ title, countries }) {
   return (
     <div className="tableContainer">
       <h3 className="tableHeader">{title}</h3>

@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "docker-build": "docker build --rm -t covid-tracker .",
     "docker-run": "docker run --rm -v ${pwd}:/react-covid-tracker -p 3000:3000 --name covid-tracker-app covid-tracker",
-    "docker-stop": "docker rm -f covid-tracker-app"
+    "docker-stop": "docker rm -f covid-tracker-app",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.8.4"
   }
 }

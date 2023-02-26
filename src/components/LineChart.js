@@ -17,15 +17,7 @@ import numeral from 'numeral';
 import './LineChart.css';
 import { COVID_API } from '../api/covid19Api';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const options = {
   responsive: true,
@@ -119,12 +111,7 @@ function LineChart({ casesType }) {
   };
 
   return (
-    <div>
-      {data?.length > 0 && (
-        <Line className="lineChart" data={allData} options={options}
-        />
-      )}
-    </div>
+    <div>{data?.length > 0 && <Line className="lineChart" data={allData} options={options} />}</div>
   );
 }
 

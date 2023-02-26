@@ -7,7 +7,7 @@ body {
 }
 
 .app {
-  display: flex; 
+  display: flex;
   justify-content: flex-start;
   background-color: #f5f6fa;
   padding: 20px 20px 0 30px;
@@ -20,7 +20,7 @@ body {
   justify-content: space-between;
 }
 
-.appHeader>h1 {
+.appHeader > h1 {
   color: #626567;
   font-size: 2rem;
 }
@@ -32,7 +32,7 @@ body {
 }
 
 .appLeft {
-  width: 980px;  
+  width: 980px;
 }
 
 .appInformation {
@@ -42,19 +42,19 @@ body {
   margin: 0 10px;
 }
 
-.appInformation>h3 {
+.appInformation > h3 {
   color: #6a5d5d;
   font-weight: 400;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
-.appInformation>h3:last-of-type {
+.appInformation > h3:last-of-type {
   margin-top: 1rem;
 }
 
 .appTables {
-  display: flex; 
+  display: flex;
   padding-left: 20px;
 }
 
@@ -96,5 +96,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(158, 158, 158); 
+  background: rgb(158, 158, 158);
 }

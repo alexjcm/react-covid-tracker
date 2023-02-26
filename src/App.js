@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-import {Form, Card} from 'react-bootstrap';
+import { Form, Card } from 'react-bootstrap';
 import numeral from 'numeral';
 import 'leaflet/dist/leaflet.css';
 
@@ -10,9 +10,9 @@ import LineChartVaccine from './components/LineChartVaccine';
 import CountryTable from './components/CountryTable';
 import CountryVaccineTable from './components/CountryVaccineTable';
 import CustomMapContainer from './components/CustomMapContainer';
-import {sortData, sortDataVaccine, prettyPrintStat} from './utils/util';
+import { sortData, sortDataVaccine, prettyPrintStat } from './utils/util';
 import './App.css';
-import {COVID_API} from './api/covid19Api';
+import { COVID_API } from './api/covid19Api';
 
 const App = () => {
   const [selectedCountry, setSelectedCountry] = useState('worldwide');
@@ -21,8 +21,8 @@ const App = () => {
   const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState('cases');
-  const [mapCenter, setMapCenter] = useState({lat: -0.27489, lng: -78.4676});
-  const [mapZoom, setMapZoom] = useState(5);
+  const [mapCenter, setMapCenter] = useState({ lat: -0.27489, lng: -78.4676 });
+  const [mapZoom, setMapZoom] = useState(7);
   const [tableVaccine, setTableVaccine] = useState([]);
 
   useEffect(() => {
@@ -54,9 +54,7 @@ const App = () => {
 
   useEffect(() => {
     const getCountriesData = async () => {
-      fetch(
-        `${COVID_API.url}/vaccine/coverage/countries?lastdays=1&fullData=true`
-      )
+      fetch(`${COVID_API.url}/vaccine/coverage/countries?lastdays=1&fullData=true`)
         .then((response) => response.json())
         .then((data) => {
           let sortedDataV = sortDataVaccine(data);
@@ -79,7 +77,7 @@ const App = () => {
         setSelectedCountry(countryCode);
         setCountryInfo(data);
         countryCode === 'worldwide'
-          ? setMapCenter({lat: -0.27489, lng: -78.4676})
+          ? setMapCenter({ lat: -0.27489, lng: -78.4676 })
           : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(5);
       });
@@ -90,10 +88,7 @@ const App = () => {
       <div className="appLeft">
         <div className="appHeader">
           <h1 className="header">COVID-19 Global Cases</h1>
-          <Form.Control
-            as="select"
-            value={selectedCountry}
-            onChange={onCountryChange}>
+          <Form.Control as="select" value={selectedCountry} onChange={onCountryChange}>
             <option value="worldwide">Worldwide</option>
             {countries.map((country) => (
               <option value={country.value}>{country.name}</option>
@@ -137,19 +132,14 @@ const App = () => {
         <Card.Body>
           <div className="appInformation">
             <div className="appTables">
-              <CountryTable
-                title="Confirmed Cases by Country"
-                countries={tableData}
-              />
+              <CountryTable title="Confirmed Cases by Country" countries={tableData} />
               <CountryVaccineTable
                 title="Vaccines rolled out by Country"
                 countries={tableVaccine}
               />
             </div>
             <div className="appChart">
-              <h3 className="lineChartName">
-                Worldwide new {casesType} in last 4 months
-              </h3>
+              <h3 className="lineChartName">Worldwide new {casesType} in last 4 months</h3>
               <LineChart title casesType={casesType} />
               <br />
               <h3 className="lineChartName">
@@ -158,9 +148,7 @@ const App = () => {
                   : `Vaccines rolled out in ${selectedCountry} in last 4 months`}
               </h3>
               <LineChartVaccine
-                selectedCountryCode={
-                  selectedCountry === 'worldwide' ? 'EC' : selectedCountry
-                }
+                selectedCountryCode={selectedCountry === 'worldwide' ? 'EC' : selectedCountry}
               />
             </div>
           </div>

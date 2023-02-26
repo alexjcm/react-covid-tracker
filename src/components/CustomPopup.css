@@ -1,30 +1,32 @@
 .infoContainer {
-    width: 145px;
+  width: 145px;
 }
 
 .leaflet-popup-content {
-    margin: 10px 0 10px 10px;
+  margin: 10px 0 10px 10px;
 }
 
 .infoFlag img {
-    width: 40px;
-    border-radius: 5px;
+  width: 40px;
+  border-radius: 5px;
 }
 
 .infoFlag {
-    height: 30px;
-    width: 30%;
-    background-size: cover;
-    border-radius: 4px;
+  height: 30px;
+  width: 30%;
+  background-size: cover;
+  border-radius: 4px;
 }
 
 .infoName {
-    font-size: 16px;
-    font-weight: bold;
-    color: #555;
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
 }
 
-.infoConfirmed, .infoRecovered, .infoDeaths {
-    font-size: 12px;
-    margin-top: 1px;
+.infoConfirmed,
+.infoRecovered,
+.infoDeaths {
+  font-size: 12px;
+  margin-top: 1px;
 }

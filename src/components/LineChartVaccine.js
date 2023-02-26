@@ -16,15 +16,7 @@ import numeral from 'numeral';
 import './LineChart.css';
 import { COVID_API } from '../api/covid19Api';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const options = {
   responsive: true,
@@ -91,9 +83,7 @@ function LineChartVaccine({ selectedCountryCode }) {
   const [data, setData] = useState({});
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(
-        `${COVID_API.url}/vaccine/coverage/countries/${selectedCountryCode}?lastdays=120`
-      )
+      await fetch(`${COVID_API.url}/vaccine/coverage/countries/${selectedCountryCode}?lastdays=120`)
         .then((response) => {
           return response.json();
         })
@@ -117,12 +107,7 @@ function LineChartVaccine({ selectedCountryCode }) {
   };
 
   return (
-    <div>
-      {data?.length > 0 && (
-        <Line className="lineChart" data={allData} options={options}
-        />
-      )}
-    </div>
+    <div>{data?.length > 0 && <Line className="lineChart" data={allData} options={options} />}</div>
   );
 }
 
