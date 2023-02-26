@@ -1,6 +1,6 @@
 # COVID-19 Global Cases Tracker
 
-[![Deploy](https://github.com/alexjcm/react-covid-tracker/actions/workflows/deploy.yml/badge.svg)](https://github.com/alexjcm/react-covid-tracker/actions) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+[![Deploy](https://github.com/alexjcm/react-covid-tracker/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/alexjcm/react-covid-tracker/actions) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 ## Features
 

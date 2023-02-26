@@ -9,7 +9,7 @@ import LineChart from './components/LineChart';
 import LineChartVaccine from './components/LineChartVaccine';
 import CountryTable from './components/CountryTable';
 import CountryVaccineTable from './components/CountryVaccineTable';
-import MapContainer from './components/MapContainer';
+import CustomMapContainer from './components/CustomMapContainer';
 import {sortData, sortDataVaccine, prettyPrintStat} from './utils/util';
 import './App.css';
 import {COVID_API} from './api/covid19Api';
@@ -126,7 +126,7 @@ const App = () => {
             total={numeral(countryInfo.deaths).format('0.0a')}
           />
         </div>
-        <MapContainer
+        <CustomMapContainer
           countries={mapCountries}
           casesType={casesType}
           center={mapCenter}

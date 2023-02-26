@@ -1,12 +1,33 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-import {Line} from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 import numeral from 'numeral';
 
 import './LineChart.css';
-import {COVID_API} from '../api/covid19Api';
+import { COVID_API } from '../api/covid19Api';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const options = {
+  responsive: true,
   plugins: {
     legend: {
       display: false,
@@ -26,7 +47,7 @@ const options = {
     },
   },
   scales: {
-    xAxes: [
+    xxes: [
       {
         type: 'time',
         time: {
@@ -66,7 +87,7 @@ const buildChartData = (data) => {
   return chartData;
 };
 
-function LineChartVaccine({selectedCountryCode}) {
+function LineChartVaccine({ selectedCountryCode }) {
   const [data, setData] = useState({});
   useEffect(() => {
     const fetchData = async () => {
@@ -84,22 +105,21 @@ function LineChartVaccine({selectedCountryCode}) {
     fetchData();
   }, [selectedCountryCode]);
 
+  const allData = {
+    datasets: [
+      {
+        backgroundColor: 'rgba(75,192,192,0.2)',
+        borderColor: 'rgba(75,192,192,1)',
+        fill: true,
+        data: data,
+      },
+    ],
+  };
+
   return (
     <div>
       {data?.length > 0 && (
-        <Line
-          className="lineChart"
-          data={{
-            datasets: [
-              {
-                backgroundColor: 'rgba(75,192,192,0.2)',
-                borderColor: 'rgba(75,192,192,1)',
-                fill: true,
-                data: data,
-              },
-            ],
-          }}
-          options={options}
+        <Line className="lineChart" data={allData} options={options}
         />
       )}
     </div>

@@ -32,7 +32,7 @@ body {
 }
 
 .appLeft {
-  width: 820px;  
+  width: 980px;  
 }
 
 .appInformation {
@@ -59,8 +59,8 @@ body {
 }
 
 .appChart {
-  width: 450px;
-  padding-top: 30px;
+  width: 560px;
+  padding-top: 60px;
   padding-left: 20px;
 }
 

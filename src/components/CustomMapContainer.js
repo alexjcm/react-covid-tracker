@@ -1,15 +1,15 @@
 import React from 'react';
 
-import {Map, TileLayer} from 'react-leaflet';
+import { Map, TileLayer } from 'react-leaflet';
 
-import {showDataOnMap} from './CustomPopup';
-import './MapContainer.css';
+import { showDataOnMap } from './CustomPopup';
+import './CustomMapContainer.css';
 
-function MapContainer({countries, casesType, center, zoom}) {
+function CustomMapContainer({ countries, casesType, center, zoom }) {
   return (
     <div className="mapContainer">
       <Map center={center} zoom={zoom} scrollWheelZoom={true}>
-        <TileLayer          
+        <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
@@ -19,4 +19,4 @@ function MapContainer({countries, casesType, center, zoom}) {
   );
 }
 
-export default MapContainer;
+export default CustomMapContainer;
