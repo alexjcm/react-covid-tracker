@@ -1,33 +1,31 @@
 {
   "name": "react-covid-19-tracker",
   "version": "1.1.0",
+  "type": "module",
   "private": true,
   "homepage": "https://alexjcm.github.io/react-covid-tracker",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "chart.js": "^3.9.1",
-    "leaflet": "^1.9.3",
+    "chart.js": "^4.4.2",
+    "chartjs-adapter-moment": "^1.0.1",
+    "leaflet": "^1.9.4",
+    "moment": "^2.30.1",
     "numeral": "^2.0.6",
-    "react": "^17.0.2",
-    "react-bootstrap": "^1.6.6",
+    "react": "^19.2.4",
+    "react-bootstrap": "^2.10.2",
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "^17.0.2",
-    "react-leaflet": "^2.8.0",
-    "react-scripts": "4.0.3"
+    "react-dom": "^19.2.4",
+    "react-leaflet": "^4.2.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.0",
+    "prettier": "^3.2.5",
+    "vite": "^5.2.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "docker-build": "docker build --rm -t covid-tracker .",
-    "docker-run": "docker run --rm -v ${pwd}:/react-covid-tracker -p 3000:3000 --name covid-tracker-app covid-tracker",
-    "docker-stop": "docker rm -f covid-tracker-app",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write \"**/*.+(jsx|json|css|md)\""
   },
   "browserslist": {
     "production": [
@@ -40,8 +38,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "prettier": "^2.8.4"
   }
 }

@@ -1,13 +1,15 @@
 .mapContainer {
-  height: 700px;
-  background-color: white;
-  padding: 10px;
-  border-radius: 15px;
-  margin-top: 16px;
-  box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .mapContainer .leaflet-container {
   height: 100%;
-  border-radius: 12px;
+  width: 100%;
+  border-radius: 0;
 }

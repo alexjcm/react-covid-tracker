@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   Chart as ChartJS,
@@ -9,14 +9,28 @@ import {
   Title,
   Tooltip,
   Legend,
+  TimeScale,
+  Filler
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+
 import numeral from 'numeral';
+import 'chartjs-adapter-moment';
 
 import './LineChart.css';
 import { COVID_API } from '../api/covid19Api';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  TimeScale,
+  Filler
+);
 
 const options = {
   responsive: true,
@@ -39,61 +53,59 @@ const options = {
     },
   },
   scales: {
-    xxes: [
-      {
-        type: 'time',
-        time: {
-          format: 'MM/DD/YY',
-          tooltipFormat: 'll',
+    x: {
+      type: 'time',
+      time: {
+        parser: 'MM/DD/YY',
+        tooltipFormat: 'll',
+      },
+    },
+    y: {
+      ticks: {
+        callback: function (value, index, values) {
+          return numeral(value).format('0a');
         },
       },
-    ],
-    yAxes: [
-      {
-        ticks: {
-          callback: function (value, index, values) {
-            return numeral(value).format('0a');
-          },
-        },
-      },
-    ],
+    },
   },
   title: {
     display: false,
   },
 };
 
-const buildChartData = (data) => {
+// FIX: The method currently only works with cases,
+// but it should also work with deaths and recovered.
+const buildChartData = (data, casesType) => {
   let chartData = [];
   let lastDataPoint;
-  for (let date in data.timeline) {
+  for (let date in data.cases) {
     if (lastDataPoint) {
       let newDataPoint = {
         x: date,
-        y: data['timeline'][date] - lastDataPoint,
+        y: data[casesType][date] - lastDataPoint,
       };
       chartData.push(newDataPoint);
     }
-    lastDataPoint = data['timeline'][date];
+    lastDataPoint = data[casesType][date];
   }
   return chartData;
 };
 
-function LineChartVaccine({ selectedCountryCode }) {
+function LineChart({ casesType }) {
   const [data, setData] = useState({});
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(`${COVID_API.url}/vaccine/coverage/countries/${selectedCountryCode}?lastdays=120`)
+      await fetch(`${COVID_API.url}/historical/all?lastdays=120`)
         .then((response) => {
           return response.json();
         })
         .then((data) => {
-          let chartData = buildChartData(data);
+          let chartData = buildChartData(data, casesType);
           setData(chartData);
         });
     };
     fetchData();
-  }, [selectedCountryCode]);
+  }, [casesType]);
 
   const allData = {
     datasets: [
@@ -111,4 +123,4 @@ function LineChartVaccine({ selectedCountryCode }) {
   );
 }
 
-export default LineChartVaccine;
+export default LineChart;

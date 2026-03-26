@@ -2,37 +2,102 @@
   margin: 0;
 }
 
-body {
-  background-color: #f5f6fa;
-}
+
 
 .app {
   display: flex;
   justify-content: flex-start;
-  background-color: #f5f6fa;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-map-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+.app-content-layer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  width: 100%;
   padding: 20px 20px 0 30px;
+  justify-content: space-between;
+  pointer-events: none; /* Let clicks pass through to the map... */
+}
+
+/* ... but re-enable pointer-events on interactable elements */
+.appLeft, .appRight {
+  pointer-events: auto;
 }
 
 .appHeader {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   justify-content: space-between;
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .appHeader > h1 {
-  color: #626567;
-  font-size: 2rem;
+  color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 5px;
+  margin-bottom: 0 !important;
 }
 
 .appStats {
   display: flex;
   justify-content: space-between;
-  color: #626567;
+  gap: 15px;
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #1f2937;
 }
 
 .appLeft {
-  width: 980px;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appRight {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 95vh;
+  overflow-y: auto;
+  /* Scrollbar styling for a cleaner look */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.appRight::-webkit-scrollbar {
+  width: 6px;
+}
+.appRight::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
 
 .appInformation {
@@ -55,20 +120,51 @@ body {
 
 .appTables {
   display: flex;
-  padding-left: 20px;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 0;
+  background: var(--bg-surface);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .appChart {
-  width: 560px;
-  padding-top: 60px;
-  padding-left: 20px;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: var(--bg-surface);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .form-control {
-  width: 150px;
-  height: 24px;
+  width: auto;
+  min-width: 150px;
+  height: auto;
+  padding: 8px 16px;
   color: #626567;
   font-size: 14px;
+  font-weight: 500;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  outline: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-control:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
 }
 
 .lineChartName {
@@ -76,25 +172,32 @@ body {
 }
 
 @media (max-width: 990px) {
-  .app {
+  .app-content-layer {
     flex-direction: column;
+    overflow-y: auto;
+    pointer-events: auto;
+  }
+  .appLeft, .appRight {
+    width: 100%;
+    margin-bottom: 20px;
   }
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #eeecec;
-  border-radius: 20px;
+  background-color: transparent;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(185, 184, 184);
-  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(158, 158, 158);
+  background-color: rgba(0, 0, 0, 0.3);
 }

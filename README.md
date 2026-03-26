@@ -21,29 +21,12 @@ In the project directory, you can run the app in the development mode:
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## More Scripts avaliables
+## Production Build
 
-`npm test`
+`npm run build`
 
-Launches the test runner in the interactive watch mode.
+Builds the app for production to the `build` folder using **Vite**. It correctly bundles React in production mode and optimizes the build for the best performance.
 
-`rpm run build`
-
-Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
-
-## Installation with Docker
-
-`npm run docker-build`
-
-`npm run docker-run`
-
-Or
-
-`docker build --rm -t covid-tracker .`
-
-`docker run --rm -p 3000:3000 --name covid-tracker-app covid-tracker`
-
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Contributing
 

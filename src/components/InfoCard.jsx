@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 import { Card } from 'react-bootstrap';
 
@@ -15,11 +15,11 @@ function InfoCard({ title, cases, total, active, caseType, ...props }) {
     >
       <Card.Body>
         <Card.Title>{title}</Card.Title>
-        <Card.Text>
+        <div className="card-text">
           <h2 className={`infoCardCases ${caseType === 'recovered' && 'infoCardCases--green'}`}>
             {cases}
           </h2>
-        </Card.Text>
+        </div>
         <Card.Footer className="infoCardTotal">{total} Total</Card.Footer>
       </Card.Body>
     </Card>
